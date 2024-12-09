@@ -4,7 +4,7 @@ INCL1 = -I/usr/local/include/SFML
 INCL2 = -I/usr/local/include/SFML/Audio
 FLAGS = -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
 TARGET = SheepFight
-SRCS = main.cpp runner.cpp player.cpp
+SRCS = main.cpp runner.cpp player.cpp game.cpp
 OBJS = $(SRCS:.cpp=.o)
 
 all: $(TARGET)

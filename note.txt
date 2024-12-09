@@ -1,0 +1,53 @@
+static functoin do not have external linkage.
+
+const can only be used with non-static member functions whereas constexpr can be used with member and non-member functions, even with constructors but with condition that argument and return type must be of literal types. 
+
+
+must check these things: autoconf/automake or premake
+
+*how to compile with sfml: 
+    g++ -I/usr/local/SFML/include -o my_program my_program.cpp -L/usr/local/SFML/lib -lcsfml-graphics -lcsfml-window -lcsfml-system
+
+when working with IDEs you'de better place libraries in the project folder too.
+
+this lesson is about shared libraries and static libraries.
+    and standard libraries and external libraries.
+
+i have installed sfml so i should use -lsfml-graphics -lsfml-window -lsfml-system,, 
+    i was using -lcsfml-graphics -lcsfml-window -lcsfml-system wich is for csfml.
+
+    in the path to libraries there is no visible file as libsfml-window.a or libsfml-window.so
+    may be it is hidden.                                    static               shared
+
+**** right way to do it:
+g++ -I/usr/local/include/SFML -o main main.cpp -L/usr/local/include/SFML -lsfml-graphics -lsfml-window -lsfml-system
+****
+
+???? threads are to be discovered here ????
+
+if you define an integer or string in a global header file that you use it in several source files
+    you have to declare it as const or you will get redefinition error.
+    or you can just declare it as extern and create a global.cpp and define it there,,
+        make sure not to define it else where.
+
+the window must be used in the same thread it is ctreated.(displaying) or you will get linking error.        
+
+    sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
+    sf::CircleShape shape(100.f);
+    shape.setFillColor(sf::Color::Green);
+
+    while (window.isOpen())
+    {
+        sf::Event event;
+        while (window.pollEvent(event))
+        {
+            if (event.type == sf::Event::Closed)
+                window.close();
+        }
+
+        window.clear();
+        window.draw(shape);
+        window.display();
+    }
+
+    return 0;

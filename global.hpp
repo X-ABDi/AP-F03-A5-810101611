@@ -4,6 +4,8 @@
 #include <iostream>
 #include <thread>
 #include <string>
+#include <vector>
+#include <map>
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/Audio.hpp>
@@ -22,6 +24,17 @@ enum type_of_event_name
     CLOSED = 1,
     KEY_PRESSED = 2,
     KEY_RELEASED = 3
+};
+
+struct sheep
+{
+    sf::Sprite sheep_sprite;
+    sf::Texture sheep_texture;
+    sf::Vector2f sheep_position;
+    int sheep_strength;
+    int sheep_damage;
+    std::string sheep_name;
+    float display_prob;
 };
 
 namespace my_window

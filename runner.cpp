@@ -19,27 +19,9 @@ void runner::run()
     while (window.isOpen())
     {
         window.clear();
-        while (window.pollEvent(event))
-        {
-            auto map_it = type_of_event_map.find(event.type);
-            if (map_it != type_of_event_map.end())
-            {
-                switch(map_it->second)
-                {
-                    case (CLOSED):
-                        window.close();
-                    break;
-                    case(KEY_PRESSED):
-                        handleKeyPressed();
-                    break;
-                    case(KEY_RELEASED):
-                        handleKeyReleased();
-                    break;    
-                }
-            } 
-        }
-        window.draw(back_sprite);
-        window.display();
+        handleEvents();
+        playGroundUpdate();
+        drawingWindow();
     }
 }
 
@@ -53,9 +35,44 @@ void runner::handleKeyPressed()
     {
 
     }
-    
 }
 
 void runner::handleKeyReleased()
 {
+}
+
+void runner::handleEvents()
+{
+    while (window.pollEvent(event))
+    {
+        auto map_it = type_of_event_map.find(event.type);
+        if (map_it != type_of_event_map.end())
+        {
+            switch(map_it->second)
+            {
+                case (CLOSED):
+                    window.close();
+                break;
+                case(KEY_PRESSED):
+                    handleKeyPressed();
+                break;
+                case(KEY_RELEASED):
+                    handleKeyReleased();
+                break;    
+            }
+        } 
+    }
+}
+
+
+void runner::playGroundUpdate ()
+{
+    
+}
+
+void runner::drawingWindow()
+{
+    window.draw(back_sprite);
+    mutual_vars.draw(this->window, this->event);
+    window.display();
 }

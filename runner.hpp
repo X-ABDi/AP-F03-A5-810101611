@@ -2,13 +2,11 @@
 #define __RUNNER_H__
 
 #include "global.hpp"
-#include "player.hpp"
+#include "game.hpp"
 
 class runner
 {
-    player black_sheep;
-    player white_sheep;
-    
+    game mutual_vars;
     sf::RenderWindow window;
     sf::Clock clock;
     sf::Event event;
@@ -16,15 +14,17 @@ class runner
     sf::SoundBuffer sound_buffer;
     sf::Texture back_texture;
     sf::Sprite back_sprite;
-    // std::thread run;
-    // std::thread game_flow_handling;
-    // void inputHandler();
+    void handleEvents();
     void handleKeyPressed();
     void handleKeyReleased();
+    void playGroundUpdate();
+    void drawingWindow();
     public:
         runner();
-        // ~runner();
         void run();
+
+    friend class game;
+    friend class player;    
 };
 
 #endif
